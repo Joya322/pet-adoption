@@ -12,6 +12,12 @@
       rel="stylesheet"
     />
 
+    <!-- fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/aee48a0862.js"
+      crossorigin="anonymous"
+    ></script>
+
     <!-- tailwindcss -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
@@ -27,6 +33,59 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <h1>hi</h1>
+    <nav class="w-11/12 mx-auto py-5">
+      <navbar id="nav-bar" class="flex justify-between items-center py-5">
+        <div class="logo flex justify-center items-center gap-2">
+          <img src="./assets/images/logo.webp" alt="logo" />
+          <h2 class="text-3xl font-black">Peddy</h2>
+        </div>
+
+        <div id="menu" class="text-center pt-2">
+          <i
+            onclick="openMenuItems()"
+            id="menuIcon"
+            class="md:hidden fa-solid text-2xl fa-bars"
+          ></i>
+
+          <ul
+            id="menu-list"
+            class="hidden md:flex justify-center items-center gap-7 text-2xl"
+          >
+            <li>Home</li>
+            <li>Shop</li>
+            <li>Contact</li>
+          </ul>
+        </div>
+
+        <div class="user">
+          <i class="fa-regular text-2xl fa-circle-user"></i>
+        </div>
+      </navbar>
+      <!-- navbar ends -->
+
+      <!-- hero section starts -->
+      <div class="hero flex flex-col justify-center items-center mt-10 gap-7">
+        <div
+          class="heroContent md:w-2/3 text-center flex flex-col justify-center items-center gap-5"
+        >
+          <h5 class="text-2xl font-semibold opacity-60">
+            Bringing Families Together
+          </h5>
+          <h1 class="text-7xl font-black">Your Path to Adoption Starts Here</h1>
+          <p class="text-xl">
+            Find unconditional love and lifelong companionship—your perfect pet
+            is waiting to meet you. Start your adoption journey today.
+          </p>
+        </div>
+        <button class="btn bg-teal-600 text-white">View More</button>
+        <div class="heroImg">
+          <img src="./assets/images/pet.webp" alt="" />
+        </div>
+      </div>
+      <!-- hero section ends -->
+    </nav>
+
+    <!-- js files -->
+    <script src="./assets/js/mobileMenu.js"></script>
   </body>
 </html>
