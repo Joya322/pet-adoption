@@ -16,17 +16,4 @@ const openMenuItems = () => {
     menus.classList.remove("flex");
     console.log("clicked again");
   }
-  //   let clicked = true;
-  //   console.log();
-  //   if (menus.classList.contains("hidden")) {
-  //   menus.classList.remove("hidden");
-  //   menuListContainer.classList = "relative flex justify-center items-center";
-  //   menus.classList =
-  //     "  ";
-  // } else {
-  //   menus.classList.add();
-  // }
-  // menus.classList = "absolute";
-  // menus.style.display = "block";
-  // console.log(menus);
 };

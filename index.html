@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
+    <!-- nav starts -->
     <nav class="w-11/12 mx-auto py-5">
       <navbar id="nav-bar" class="flex justify-between items-center py-5">
         <div class="logo flex justify-center items-center gap-2">
@@ -77,15 +78,46 @@
             is waiting to meet you. Start your adoption journey today.
           </p>
         </div>
-        <button class="btn bg-teal-600 text-white">View More</button>
+        <button class="btn bg-teal-600 text-white">
+          <a href="#adopt-best-friend">View More</a>
+        </button>
         <div class="heroImg">
           <img src="./assets/images/pet.webp" alt="" />
         </div>
       </div>
       <!-- hero section ends -->
     </nav>
+    <!-- nav ends -->
+
+    <!-- main starts -->
+    <main class="w-11/12 mx-auto py-10">
+      <section id="adopt-best-friend" class="text-[rgba(19,19,19) flex flex-col justify-center items-center">
+        <!-- title -->
+        <h2 class="text-[40px] font-black mb-5">Adopt  Your  Best Friend</h2>
+
+        <!-- description -->
+        <p class="opacity-70 mb-6">Open your heart and home to a loyal companion—because the best friends have paws, tails, and endless love to give.</p>
+
+        <!-- categories container -->
+        <div id="categories-container" class="mb-8 w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-5"></div>
+
+        <!-- sort button container -->
+        <div id="sortBtnContainer" class="py-3 w-full flex justify-between items-center">
+          <h4 class="text-2xl font-black">Best Deal For you</h4>
+          <button class="btn bg-teal-600 text-white text-xl font-bold">Sort by Price</button>
+        </div>
+
+        <!-- card container -->
+        <div id="cards" class="flex justify-center items-start w-full gap-5">
+          <div id="left-cards" class="w-3/4 grid grid-cols-3 gap-6"></div>
+          <div id="right-cards" class="w-1/4 min-h-screen border rounded-lg p-5">right</div>
+        </div>
+      </section>
+    </main>
+    <!-- main ends -->
 
     <!-- js files -->
     <script src="./assets/js/mobileMenu.js"></script>
+    <script src="./assets/js/APICalling.js"></script>
   </body>
 </html>
