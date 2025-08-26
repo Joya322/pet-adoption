@@ -304,21 +304,33 @@ const disableElementWithTimer = (id) => {
   const clickedAdoptBtn = document.getElementById(`adoptBtn${id}`);
   console.log(clickedAdoptBtn);
 
+  let countingModal = document.getElementById("counting-modal");
+
+  countingModal.showModal();
+
   // getting timer element
   const p = document.getElementById("timer-element");
+  p.innerText = "";
 
-  let count = 0;
+  let count = 3;
   const timer = setInterval(function () {
     // increase count by 1
-    count++;
+    // console.log(count)
     // set count as innerText in timer element
     p.innerText = count;
+    count--;
+    // console.log(count);
+    // console.log(".....");
 
-
-  });
+    // set limitation
+    if (count < 0) {
+      clearInterval(timer);
+      countingModal.close();
+      clickedAdoptBtn.innerText = "Adopted";
+    }
+  }, 1000);
 
   // call modal
-  document.getElementById("counting-modal").showModal();
   // make button disabled
   clickedAdoptBtn.disabled = true;
 };

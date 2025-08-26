@@ -226,13 +226,16 @@
     <!-- Open the modal using ID.showModal() method -->
     <dialog id="counting-modal" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
-        <p id="timer-element" class="py-4">1</p>
-        <div class="modal-action">
-          <form method="dialog">
-            <!-- if there is a button in form, it will close the modal -->
-            <button class="btn">Close</button>
-          </form>
+        <div class="counter-contents flex flex-col justify-center items-center pt-10 gap-2">
+          <i class="fa-regular fa-handshake text-3xl text-green-400"></i>
+          <h2 class="text-4xl text-black font-black">Congrates</h2>
+          <p class="text-lg text-black font-medium">Adoption Process is Start For your Pet</p>
+          <p id="timer-element" class="text-5xl text-black font-black">1</p>
         </div>
+        <!-- <div class="modal-action">
+          <form method="dialog">
+          </form>
+        </div> -->
       </div>
     </dialog>
 
