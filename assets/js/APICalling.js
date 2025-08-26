@@ -95,7 +95,7 @@ const displayCategories = (categories) => {
     // create category html
     const categoryDiv = document.createElement("div");
     categoryDiv.classList =
-      "category-btns flex justify-center items-center gap-5 py-5 border border-teal-200 rounded-lg cursor-pointer";
+      "category-btns flex justify-center items-center gap-5 px-2 py-5 border border-teal-200 rounded-lg cursor-pointer";
 
     if (category.id === 1) {
       //   console.log(category.id);
@@ -189,17 +189,19 @@ const displayPets = (pets) => {
                 
     </div>
 
-    <div id="buttons" class="pt-4 flex justify-between items-center">
+    <div id="buttons" class="pt-4 flex justify-center items-center md:gap-2 xl:gap-0 xl:justify-between">
 
       <button onclick="likedPets('cardImg${pet.petId}')" class="btn">
-        <i class="fa-regular fa-thumbs-up"></i>
+        <i class="xl:text-lg fa-regular fa-thumbs-up"></i>
       </button>
 
       <button id="adoptBtn${pet.petId}" onclick="disableElementWithTimer(${
       pet.petId
-    })" class="btn text-teal-600">Adopt</button>
+    })" class="btn text-teal-600 xl:text-lg">Adopt</button>
 
-      <button onclick="loadDetailsById(${pet.petId})" class="btn text-teal-700">
+      <button onclick="loadDetailsById(${
+        pet.petId
+      })" class="btn text-teal-700 xl:text-lg">
         Details
       </button>
     </div>
@@ -358,7 +360,7 @@ const toggleLoadingSpinner = (isLoading) => {
   } else {
     // this will hide the spinner after 2seconds
     setTimeout(() => {
-    spinner.classList.add("hidden");
+      spinner.classList.add("hidden");
     }, 2000);
   }
 };
