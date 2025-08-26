@@ -57,19 +57,24 @@ const loadCategorizePets = async (categoryName) => {
   } catch (err) {
     console.log(err);
   }
-
-  //   try {
-  //     const res = await fetch(
-  //       `https://openapi.programming-hero.com/api/peddy/category/${categoryName}`
-  //     );
-  //     const data = await res.json();
-
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
   // finally {
   //   loadAllPets();
   // }
+};
+
+// load details by pet id
+const loadDetailsById = async (petId) => {
+  try {
+    const res = await fetch(
+      `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
+    );
+    const data = await res.json();
+    displayModal(data.petData);
+    // console.log(data.data);
+  } catch (err) {
+    console.log(err);
+  }
+  // console.log(petId);
 };
 
 // displayCategories function
@@ -143,34 +148,47 @@ const displayPets = (pets) => {
     }"/>
 
                 <div id="cardContents" class="mt-6 flex flex-col justify-center gap-2 border-b pb-4">
-                <h4 class="text-xl font-bold text-black">${
-                  pet?.pet_name ?? "No data found"
-                }</h4>
-                <div class="flex items-center gap-2 text-black opacity-70">
-                    <i class="fa-regular fa-object-group"></i>
-                    <p>Breed: ${pet?.breed ?? "No data found"}</p>
-                </div>
-                <div class="flex items-center gap-2 text-black opacity-70">
-                    <i class="fa-regular fa-calendar"></i>
-                    <p>Birth: ${birth?.substring(0, 4) ?? "No data found"}</p>
-                </div>
-                <div class="flex items-center gap-2 text-black opacity-70">
-                    <i class="fa-regular fa-user"></i>
-                    <p>Gender: ${pet?.gender ?? "No data found"}</p>
-                </div>
-                <div class="flex items-center gap-2 text-black opacity-70">
-                    <i class="fa-regular fa-calendar"></i>
-                    <p>Price: ${pet?.price ?? "No data found"}$</p>
-                </div>
+                    <h4 class="text-xl font-bold text-black">${
+                      pet?.pet_name ?? "No data found"
+                    }</h4>
+
+                    <div class="flex items-center gap-2 text-black opacity-70">
+
+                        <i class="fa-regular fa-object-group"></i>
+
+                        <p>Breed: ${pet?.breed ?? "No data found"}</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 text-black opacity-70">
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <p>Birth: ${
+                          birth?.substring(0, 4) ?? "No data found"
+                        }</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 text-black opacity-70">
+                        <i class="fa-regular fa-user"></i>
+
+                        <p>Gender: ${pet?.gender ?? "No data found"}</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 text-black opacity-70">
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <p>Price: ${pet?.price ?? "No data found"}$</p>
+                    </div>
                 
-            </div>
+                </div>
 
             <div id="buttons" class="pt-4 flex justify-between items-center">
                 <button onclick="likedPets('cardImg${
                   pet.petId
                 }')" class="btn"><i class="fa-regular fa-thumbs-up"></i></button>
                 <button class="btn text-teal-600">Adopt</button>
-                <button class="btn text-teal-700">Details</button>
+                <button onclick="loadDetailsById(${
+                  pet.petId
+                })" class="btn text-teal-700">Details</button>
             </div>
             
         `;
@@ -179,24 +197,93 @@ const displayPets = (pets) => {
   });
 };
 
+// Modal
+const displayModal = (petData) => {
+  console.log(petData);
+  // getting modal contents container
+  const modalContentContainer = document.getElementById("modal-contents");
+
+  modalContentContainer.innerHTML = `
+    <img class="w-full object-fill rounded-lg h-[300px]" src="${
+      petData?.image ?? "No data found"
+    }"/>
+
+    <div id="cardContents" class="mt-4 flex flex-col justify-center gap-2 border-b pb-4">
+
+      <h4 class="text-2xl mb-4 font-bold text-black">
+        ${petData.pet_name ?? "No data found"}
+      </h4>
+
+      <div id="characteristics" class="grid grid-cols-2 gap-2">
+        <div class="flex items-center gap-2 text-black opacity-70">
+
+          <i class="fa-regular fa-object-group"></i>
+
+          <p>Breed: ${petData?.breed ?? "No data found"}</p>
+        </div>
+
+        <div class="flex items-center gap-2 text-black opacity-70">
+          <i class="fa-regular fa-calendar"></i>
+
+          <p>
+            Birth: ${petData.date_of_birth?.substring(0, 4) ?? "No data found"}
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 text-black opacity-70">
+          <i class="fa-regular fa-user"></i>
+
+          <p>Gender: ${petData?.gender ?? "No data found"}</p>
+        </div>
+
+        <div class="flex items-center gap-2 text-black opacity-70">
+          <i class="fa-regular fa-calendar"></i>
+
+          <p>Price: ${petData?.price ?? "No data found"}$</p>
+        </div>
+
+        <div class="flex items-center gap-2 text-black opacity-70">
+          <i class="fa-solid fa-syringe"></i>
+
+          <p>
+            Vaccinated status: ${petData?.vaccinated_status ?? "No data found"}
+          </p>
+        </div>
+      </div>
+                
+    </div>
+    
+    <div>
+      <h3 class="font-semibold text-black">Details Information</h3>
+      <p class="text-black opacity-70">
+        ${petData.pet_details}
+      </p>
+    </div>
+  
+  `;
+
+  document.getElementById("modal").showModal();
+  // console.log(petData);
+};
+
 // display liked pets
 const likedPets = (imageId) => {
-    // getting selected card image id
-    const image = document.getElementById(imageId);
-    // getting src attribute value
-    const src = image.getAttribute("src");
+  // getting selected card image id
+  const image = document.getElementById(imageId);
+  // getting src attribute value
+  const src = image.getAttribute("src");
 
-    // create img tag
-    const img = document.createElement("img");
-    img.setAttribute("src", `${src}`);
-    img.classList = "w-[140px] h-[124px] rounded-lg"
+  // create img tag
+  const img = document.createElement("img");
+  img.setAttribute("src", `${src}`);
+  img.classList = "w-[140px] h-[124px] rounded-lg";
 
-    // getting selected pet container
-    const selectedPetContainer = document.getElementById("right-cards");
+  // getting selected pet container
+  const selectedPetContainer = document.getElementById("right-cards");
 
-    // appendChild in selectedPetContainer
-    selectedPetContainer.appendChild(img);
-    
+  // appendChild in selectedPetContainer
+  selectedPetContainer.appendChild(img);
+
   console.log(selectedPetContainer);
 };
 
