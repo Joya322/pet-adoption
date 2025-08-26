@@ -50,15 +50,15 @@ const loadCategorizePets = async (categoryName) => {
   // add style to clicked button
   clickedCategoryBtn.classList.add("active", "rounded-[120px]");
 
-  toggleLoadingSpinner(true);
-
   //   load categorize pets
   try {
+    toggleLoadingSpinner(true);
     const res = await fetch(
       `https://openapi.programming-hero.com/api/peddy/category/${categoryName}`
     );
     const data = await res.json();
     pets = data.data;
+
     toggleLoadingSpinner(false);
     displayPets(pets);
     // console.log(data.data);
@@ -119,6 +119,7 @@ const displayCategories = (categories) => {
 // console.log(pet);
 // display Pets function;
 const displayPets = (pets) => {
+  // toggleLoadingSpinner(true);
   // getting pets container cards section
   const petsContainer = document.getElementById("left-cards");
 
@@ -206,10 +207,11 @@ const displayPets = (pets) => {
         `;
 
     petsContainer.appendChild(petCard);
+    // toggleLoadingSpinner(false);
   });
 };
 
-// Modal
+// Modal for details
 const displayModal = (petData) => {
   // console.log(petData);
   // getting modal contents container
@@ -288,7 +290,7 @@ const likedPets = (imageId) => {
   // create img tag
   const img = document.createElement("img");
   img.setAttribute("src", `${src}`);
-  img.classList = "w-[140px] h-[124px] rounded-lg";
+  img.classList = "rounded-lg";
 
   // getting selected pet container
   const selectedPetContainer = document.getElementById("right-cards");
@@ -299,6 +301,7 @@ const likedPets = (imageId) => {
   console.log(selectedPetContainer);
 };
 
+// adopt button with timer and disabled function
 const disableElementWithTimer = (id) => {
   // getting clicked adopt button
   const clickedAdoptBtn = document.getElementById(`adoptBtn${id}`);
@@ -335,6 +338,7 @@ const disableElementWithTimer = (id) => {
   clickedAdoptBtn.disabled = true;
 };
 
+// sort by price
 document.getElementById("sortBtn").addEventListener("click", () => {
   pets.sort((a, b) => {
     return b.price - a.price;
@@ -354,7 +358,7 @@ const toggleLoadingSpinner = (isLoading) => {
   } else {
     // this will hide the spinner after 2seconds
     setTimeout(() => {
-      spinner.classList.add("hidden");
+    spinner.classList.add("hidden");
     }, 2000);
   }
 };

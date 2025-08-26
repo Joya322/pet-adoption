@@ -4,7 +4,6 @@ const openMenuItems = () => {
   const menuListContainer = document.getElementById("menu");
 
   if (isClicked) {
-    console.log("clicked");
     menus.classList.remove("hidden");
     menuListContainer.classList.add("relative");
     menus.classList.add("absolute", "-left-26");
