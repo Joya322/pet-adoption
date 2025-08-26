@@ -1,3 +1,4 @@
+let pets = [];
 // loadCategories function
 const loadCategories = async () => {
   try {
@@ -16,12 +17,15 @@ const loadCategories = async () => {
 
 // load all pets function
 const loadAllPets = async () => {
+  toggleLoadingSpinner(true);
   try {
     const res = await fetch(
       "https://openapi.programming-hero.com/api/peddy/pets"
     );
     const data = await res.json();
-    displayPets(data.pets);
+    pets = data.pets;
+    toggleLoadingSpinner(false);
+    displayPets(pets);
     //   console.log(data.pets);
   } catch (err) {
     console.log(err);
@@ -46,13 +50,17 @@ const loadCategorizePets = async (categoryName) => {
   // add style to clicked button
   clickedCategoryBtn.classList.add("active", "rounded-[120px]");
 
+  toggleLoadingSpinner(true);
+
   //   load categorize pets
   try {
     const res = await fetch(
       `https://openapi.programming-hero.com/api/peddy/category/${categoryName}`
     );
     const data = await res.json();
-    displayPets(data.data);
+    pets = data.data;
+    toggleLoadingSpinner(false);
+    displayPets(pets);
     // console.log(data.data);
   } catch (err) {
     console.log(err);
@@ -141,55 +149,59 @@ const displayPets = (pets) => {
     petCard.classList = "border rounded-lg p-5";
     petCard.innerHTML = `
     
-                <img id="cardImg${
-                  pet.petId
-                }" class="w-full rounded-lg h-[180px]" src="${
+        <img id="cardImg${
+          pet.petId
+        }" class="w-full rounded-lg h-[180px]" src="${
       pet?.image ?? "No data found"
     }"/>
 
-                <div id="cardContents" class="mt-6 flex flex-col justify-center gap-2 border-b pb-4">
-                    <h4 class="text-xl font-bold text-black">${
-                      pet?.pet_name ?? "No data found"
-                    }</h4>
+    <div id="cardContents" class="mt-6 flex flex-col justify-center gap-2 border-b pb-4">
 
-                    <div class="flex items-center gap-2 text-black opacity-70">
+      <h4 class="text-xl font-bold text-black">${
+        pet?.pet_name ?? "No data found"
+      }</h4>
 
-                        <i class="fa-regular fa-object-group"></i>
+      <div class="flex items-center gap-2 text-black opacity-70">
 
-                        <p>Breed: ${pet?.breed ?? "No data found"}</p>
-                    </div>
+        <i class="fa-regular fa-object-group"></i>
 
-                    <div class="flex items-center gap-2 text-black opacity-70">
-                        <i class="fa-regular fa-calendar"></i>
+        <p>Breed: ${pet?.breed ?? "No data found"}</p>
+      </div>
 
-                        <p>Birth: ${
-                          birth?.substring(0, 4) ?? "No data found"
-                        }</p>
-                    </div>
+      <div class="flex items-center gap-2 text-black opacity-70">
+        <i class="fa-regular fa-calendar"></i>
 
-                    <div class="flex items-center gap-2 text-black opacity-70">
-                        <i class="fa-regular fa-user"></i>
+        <p>Birth: ${birth?.substring(0, 4) ?? "No data found"}</p>
+      </div>
 
-                        <p>Gender: ${pet?.gender ?? "No data found"}</p>
-                    </div>
+      <div class="flex items-center gap-2 text-black opacity-70">
+        <i class="fa-regular fa-user"></i>
 
-                    <div class="flex items-center gap-2 text-black opacity-70">
-                        <i class="fa-regular fa-calendar"></i>
+        <p>Gender: ${pet?.gender ?? "No data found"}</p>
+      </div>
 
-                        <p>Price: ${pet?.price ?? "No data found"}$</p>
-                    </div>
+      <div class="flex items-center gap-2 text-black opacity-70">
+        <i class="fa-regular fa-calendar"></i>
+
+        <p>Price: ${pet?.price ?? "No data found"}$</p>
+      </div>
                 
-                </div>
+    </div>
 
-            <div id="buttons" class="pt-4 flex justify-between items-center">
-                <button onclick="likedPets('cardImg${
-                  pet.petId
-                }')" class="btn"><i class="fa-regular fa-thumbs-up"></i></button>
-                <button class="btn text-teal-600">Adopt</button>
-                <button onclick="loadDetailsById(${
-                  pet.petId
-                })" class="btn text-teal-700">Details</button>
-            </div>
+    <div id="buttons" class="pt-4 flex justify-between items-center">
+
+      <button onclick="likedPets('cardImg${pet.petId}')" class="btn">
+        <i class="fa-regular fa-thumbs-up"></i>
+      </button>
+
+      <button id="adoptBtn${pet.petId}" onclick="disableElement(${
+      pet.petId
+    })" class="btn text-teal-600">Adopt</button>
+
+      <button onclick="loadDetailsById(${pet.petId})" class="btn text-teal-700">
+        Details
+      </button>
+    </div>
             
         `;
 
@@ -199,7 +211,7 @@ const displayPets = (pets) => {
 
 // Modal
 const displayModal = (petData) => {
-  console.log(petData);
+  // console.log(petData);
   // getting modal contents container
   const modalContentContainer = document.getElementById("modal-contents");
 
@@ -287,6 +299,38 @@ const likedPets = (imageId) => {
   console.log(selectedPetContainer);
 };
 
+const disableElement = (id) => {
+  // getting clicked adopt button
+  const clickedAdoptBtn = document.getElementById(`adoptBtn${id}`);
+  console.log(clickedAdoptBtn);
+
+  clickedAdoptBtn.disabled = true;
+};
+
+document.getElementById("sortBtn").addEventListener("click", () => {
+  pets.sort((a, b) => {
+    return a.price - b.price;
+  });
+  console.log(pets);
+
+  displayPets(pets);
+});
+
+setTimeout(() => {}, 2000);
+// spinner
+const toggleLoadingSpinner = (isLoading) => {
+  // get spinner div
+  const spinner = document.getElementById("spinner");
+
+  if (isLoading) {
+    spinner.classList.remove("hidden");
+  } else {
+    // this will hide the spinner after 2seconds
+    setTimeout(() => {
+      spinner.classList.add("hidden");
+    }, 2000);
+  }
+};
+
 // calling loadCategories function
 loadCategories();
-// loadAllPets();

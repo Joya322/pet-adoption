@@ -115,13 +115,22 @@
           class="py-3 w-full flex justify-between items-center"
         >
           <h4 class="text-2xl font-black">Best Deal For you</h4>
-          <button class="btn bg-teal-600 text-white text-xl font-bold">
+          <button
+            id="sortBtn"
+            class="btn bg-teal-600 text-white text-xl font-bold"
+          >
             Sort by Price
           </button>
         </div>
 
+        <!-- spinner -->
+          <span id="spinner" class="hidden py-[200px] loading loading-bars loading-lg"></span>
+
         <!-- card container -->
-        <div id="cards" class="flex flex-col md:flex-row justify-center items-start w-full gap-5">
+        <div
+          id="cards"
+          class="flex flex-col md:flex-row justify-center items-start w-full gap-5"
+        >
           <div
             id="left-cards"
             class="w-full md:w-3/4 grid grid-cols-2 md:grid-cols-3 gap-6"
@@ -143,7 +152,11 @@
             <div class="modal-action">
               <form class="w-full" method="dialog">
                 <!-- if there is a button in form, it will close the modal -->
-                <button class="btn border border-[rgba(14,122,129,0.2)] bg-[rgba(14,122,129,0.1)] w-full">Cancel</button>
+                <button
+                  class="btn border border-[rgba(14,122,129,0.2)] bg-[rgba(14,122,129,0.1)] w-full"
+                >
+                  Cancel
+                </button>
               </form>
             </div>
           </div>
