@@ -194,7 +194,7 @@ const displayPets = (pets) => {
         <i class="fa-regular fa-thumbs-up"></i>
       </button>
 
-      <button id="adoptBtn${pet.petId}" onclick="disableElement(${
+      <button id="adoptBtn${pet.petId}" onclick="disableElementWithTimer(${
       pet.petId
     })" class="btn text-teal-600">Adopt</button>
 
@@ -299,24 +299,39 @@ const likedPets = (imageId) => {
   console.log(selectedPetContainer);
 };
 
-const disableElement = (id) => {
+const disableElementWithTimer = (id) => {
   // getting clicked adopt button
   const clickedAdoptBtn = document.getElementById(`adoptBtn${id}`);
   console.log(clickedAdoptBtn);
 
+  // getting timer element
+  const p = document.getElementById("timer-element");
+
+  let count = 0;
+  const timer = setInterval(function () {
+    // increase count by 1
+    count++;
+    // set count as innerText in timer element
+    p.innerText = count;
+
+
+  });
+
+  // call modal
+  document.getElementById("counting-modal").showModal();
+  // make button disabled
   clickedAdoptBtn.disabled = true;
 };
 
 document.getElementById("sortBtn").addEventListener("click", () => {
   pets.sort((a, b) => {
-    return a.price - b.price;
+    return b.price - a.price;
   });
   console.log(pets);
 
   displayPets(pets);
 });
 
-setTimeout(() => {}, 2000);
 // spinner
 const toggleLoadingSpinner = (isLoading) => {
   // get spinner div

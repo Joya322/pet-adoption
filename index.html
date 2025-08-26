@@ -124,7 +124,10 @@
         </div>
 
         <!-- spinner -->
-          <span id="spinner" class="hidden py-[200px] loading loading-bars loading-lg"></span>
+        <span
+          id="spinner"
+          class="hidden py-[200px] loading loading-bars loading-lg"
+        ></span>
 
         <!-- card container -->
         <div
@@ -164,6 +167,74 @@
       </section>
     </main>
     <!-- main ends -->
+
+    <footer class="bg-black py-[100px]">
+      <div
+        class="footer-container w-11/12 mx-auto flex justify-between items-center text-white"
+      >
+        <div class="company-details">
+          <div class="logo flex items-center gap-2 mb-5">
+            <img src="./assets/images/logo.webp" alt="logo" />
+            <h2 class="text-3xl font-black">Peddy</h2>
+          </div>
+
+          <div class="opacity-90">
+            <p>Location: av. Washington 165, NY CA 54003</p>
+            <p>Phone: +31 85 964 47 25</p>
+            <p>Email: info@yourdomain.com</p>
+            <p>Openings hours: 9.00 AM - 5.00 PM</p>
+          </div>
+          <div class="media mt-4 flex items-center gap-5 text-2xl">
+            <i class="fa-brands fa-facebook" style="color: #043281"></i>
+            <i class="fa-brands fa-x-twitter" style="color: #ffffff"></i>
+            <i class="fa-brands fa-youtube" style="color: #ea1010"></i>
+            <i class="fa-brands fa-instagram" style="color: #c21451"></i>
+          </div>
+        </div>
+        <div class="links">
+          <h4 class="text-lg font-bold mb-5 opacity-90">Useful Links</h4>
+          <ul class="opacity-60">
+            <li><a href="">Home</a></li>
+            <li><a href="">About Us</a></li>
+            <li><a href="">Animals</a></li>
+            <li><a href="">Foundation</a></li>
+            <li><a href="">Contact</a></li>
+          </ul>
+        </div>
+        <div class="message">
+          <h3 class="text-lg font-bold mb5 opacity-90 mb-5">Drop a Message</h3>
+          <input
+            class="w-[300px] p-4 rounded-xl mb-4 bg-[rgba(255,255,255,0.05)] opacity-60"
+            type="email"
+            name=""
+            id=""
+            placeholder="Enter your email"
+          />
+          <br />
+          <input
+            class="w-[300px] p-3 rounded-xl mb-4 text-xl font-bold bg-[rgba(14,122,129)] text-white"
+            type="email"
+            name=""
+            id=""
+            placeholder="Subscribe"
+          />
+        </div>
+      </div>
+    </footer>
+
+    <!-- counting modal -->
+    <!-- Open the modal using ID.showModal() method -->
+    <dialog id="counting-modal" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <p id="timer-element" class="py-4">1</p>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
 
     <!-- js files -->
     <script src="./assets/js/mobileMenu.js"></script>
